@@ -2,24 +2,23 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { RequestLoggerMiddleware } from './common/middleware/request-logger.middleware.js';
 import { PrismaModule } from './prisma/prisma.module.js';
-import { UsersModule } from './users/users.module.js';
-import { CartsModule } from './carts/carts.module.js';
-import { CartItemsModule } from './cart-items/cart-items.module.js';
-import { CategoriesModule } from './categories/categories.module.js';
-import { BrandsModule } from './brands/brands.module.js';
-import { ProductsModule } from './products/products.module.js';
-import { ProductDetailsModule } from './product-details/product-details.module.js';
-import { ProductImagesModule } from './product-images/product-images.module.js';
-import { ReviewsModule } from './reviews/reviews.module.js';
-import { WishlistsModule } from './wishlists/wishlists.module.js';
-import { OrdersModule } from './orders/orders.module.js';
-import { OrderItemsModule } from './order-items/order-items.module.js';
-import { OrderStatusHistoryModule } from './order-status-history/order-status-history.module.js';
-import { PaymentsModule } from './payments/payments.module.js';
-import { AddressesModule } from './addresses/addresses.module.js';
-import { AuthModule } from './auth/auth.module.js';
-import { TelegramModule } from './telegram/telegram.module.js';
-import { UploadsModule } from './uploads/uploads.module.js';
+import { UsersModule } from './modules/users/users.module.js';
+import { CartsModule } from './modules/carts/carts.module.js';
+import { CategoriesModule } from './modules/categories/categories.module.js';
+import { BrandsModule } from './modules/brands/brands.module.js';
+import { ProductsModule } from './modules/products/products.module.js';
+import { ProductDetailsModule } from './modules/product-details/product-details.module.js';
+import { ProductImagesModule } from './modules/product-images/product-images.module.js';
+import { ReviewsModule } from './modules/reviews/reviews.module.js';
+import { WishlistsModule } from './modules/wishlists/wishlists.module.js';
+import { OrdersModule } from './modules/orders/orders.module.js';
+import { OrderItemsModule } from './modules/order-items/order-items.module.js';
+import { OrderStatusHistoryModule } from './modules/order-status-history/order-status-history.module.js';
+import { PaymentsModule } from './modules/payments/payments.module.js';
+import { AddressesModule } from './modules/addresses/addresses.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+import { TelegramModule } from './modules/telegram/telegram.module.js';
+import { UploadsModule } from './modules/uploads/uploads.module.js';
 
 @Module({
   imports: [
@@ -38,7 +37,6 @@ import { UploadsModule } from './uploads/uploads.module.js';
     PrismaModule,
     UsersModule,
     CartsModule,
-    CartItemsModule,
     CategoriesModule,
     BrandsModule,
     ProductsModule,
@@ -60,6 +58,6 @@ import { UploadsModule } from './uploads/uploads.module.js';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(RequestLoggerMiddleware).forRoutes('*');
+    consumer.apply(RequestLoggerMiddleware).forRoutes('{*path}');
   }
 }
